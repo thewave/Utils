@@ -25,6 +25,6 @@
         status="integration">
 	</info>
 	<dependencies>
-		<dependency org="org.hibernate.javax.persistence" name="hibernate-jpa-2.0-api" rev="1.0.0.Final"/>
+		<dependency org="org.hibernate.javax.persistence" name="hibernate-jpa-2.0-api" rev="1.0.0.Final" transitive="false"/>
 	</dependencies>
 </ivy-module>
