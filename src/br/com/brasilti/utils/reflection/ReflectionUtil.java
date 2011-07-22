@@ -1,7 +1,8 @@
-package br.com.wave.utils.reflection;
+package br.com.brasilti.utils.reflection;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -154,7 +155,18 @@ public class ReflectionUtil {
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-		
+
+		return false;
+	}
+
+	public static boolean hasMethod(Class<?> klass, String methodName) {
+		Method[] methods = klass.getDeclaredMethods();
+		for (Method method : methods) {
+			if (method.getName().equals(methodName)) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 

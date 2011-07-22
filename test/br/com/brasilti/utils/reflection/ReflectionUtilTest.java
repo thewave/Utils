@@ -1,4 +1,4 @@
-package br.com.wave.utils.reflection;
+package br.com.brasilti.utils.reflection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,14 +19,17 @@ import javax.persistence.Version;
 
 import org.junit.Test;
 
-import br.com.wave.utils.reflection.examples.ClasseComAtEntity;
-import br.com.wave.utils.reflection.examples.ClasseComAtributosPadrao;
-import br.com.wave.utils.reflection.examples.ClasseComConstrutorPadrao;
-import br.com.wave.utils.reflection.examples.ClasseComId;
-import br.com.wave.utils.reflection.examples.ClasseNaoSerializavel;
-import br.com.wave.utils.reflection.examples.ClasseSemAtEntity;
-import br.com.wave.utils.reflection.examples.ClasseSemConstrutorPadrao;
-import br.com.wave.utils.reflection.examples.ClasseSerializavel;
+import br.com.brasilti.utils.reflection.ReflectionUtil;
+import br.com.brasilti.utils.reflection.examples.ClasseComAtEntity;
+import br.com.brasilti.utils.reflection.examples.ClasseComAtributosPadrao;
+import br.com.brasilti.utils.reflection.examples.ClasseComConstrutorPadrao;
+import br.com.brasilti.utils.reflection.examples.ClasseComEquals;
+import br.com.brasilti.utils.reflection.examples.ClasseComId;
+import br.com.brasilti.utils.reflection.examples.ClasseNaoSerializavel;
+import br.com.brasilti.utils.reflection.examples.ClasseSemAtEntity;
+import br.com.brasilti.utils.reflection.examples.ClasseSemConstrutorPadrao;
+import br.com.brasilti.utils.reflection.examples.ClasseSemEquals;
+import br.com.brasilti.utils.reflection.examples.ClasseSerializavel;
 
 @SuppressWarnings("unused")
 public class ReflectionUtilTest {
@@ -46,7 +49,7 @@ public class ReflectionUtilTest {
 	private String atributoDoTipoString;
 
 	private Collection<String> colecao;
-	
+
 	@Id
 	private Long id;
 
@@ -269,6 +272,16 @@ public class ReflectionUtilTest {
 	@Test
 	public void deveRetornarVerdadeiroQuandoUmaClasseTiverUmConstrutorPadrao() {
 		assertTrue(ReflectionUtil.hasConstructor(ClasseComConstrutorPadrao.class));
+	}
+
+	@Test
+	public void deveRetornarFalsoQuandoUmaClasseNaoTiverUmDeterminadoMetodo() {
+		assertFalse(ReflectionUtil.hasMethod(ClasseSemEquals.class, "equals"));
+	}
+
+	@Test
+	public void deveRetornarVerdadeiroQuandoUmaClasseTiverUmDeterminadoMetodo() {
+		assertTrue(ReflectionUtil.hasMethod(ClasseComEquals.class, "equals"));
 	}
 
 	private Field getField(String fieldName, Class<?> klass) {
